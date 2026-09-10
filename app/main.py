@@ -2,7 +2,6 @@ import hashlib
 from contextlib import asynccontextmanager
 from typing import Annotated
 from urllib.parse import quote
-
 import httpx
 import jwt
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
@@ -83,7 +82,7 @@ def create_app(settings: Settings | None = None, transport=None) -> FastAPI:
         try:
             return result.json()
         except ValueError:
-            raise HTTPException(502, "Invalid issuer response") from None
+            raise HTTPException(502, "Invalid issuer response.") from None
 
     @app.get("/healthz")
     def health():
