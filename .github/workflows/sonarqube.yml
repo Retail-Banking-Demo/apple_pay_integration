@@ -1,0 +1,31 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  sonarqube:
+    name: SonarQube Analysis
+    runs-on: [self-hosted, macOS, X64]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v8.2.1
+        with:
+          skipSignatureVerification: true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
