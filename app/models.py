@@ -10,7 +10,7 @@ def validate_base64(value: str) -> str:
         if not base64.b64decode(value, validate=True):
             raise ValueError("Empty binary data")
     except (ValueError, binascii.Error) as exc:
-        raise ValueError("Expected nonempty standard Base64 data") from exc
+        raise ValueError("Expected nonempty standard Base64 data.") from exc
     return value
 
 
